@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import styles from "./App.module.css";
-import CentetCircle from "../CentetCircle/CentetCircle";
+import CenterCircle from "../CenterCircle/CenterCircle";
 
 const App = () => {
   const [currentPoint, setCurrentPoint] = useState(1);
@@ -8,11 +8,32 @@ const App = () => {
   const [pointDeg, setPointDeg] = useState(60);
 
   const onPointClick = (point: number) => {
+    const pointsDiff = Math.abs(currentPoint - point);
+
+    if (pointsDiff <= Math.floor(6 / 2)) {
+      if (point > currentPoint) {
+        setCircleDeg(circleDeg + Math.floor(360 / 6) * pointsDiff);
+        setPointDeg(pointDeg - Math.floor(360 / 6) * pointsDiff);
+      } else {
+        setCircleDeg(circleDeg - Math.floor(360 / 6) * pointsDiff);
+        setPointDeg(pointDeg + Math.floor(360 / 6) * pointsDiff);
+      }
+    } else {
+      if (point > currentPoint) {
+        setCircleDeg(circleDeg - Math.floor(360 / 6) * (6 - pointsDiff));
+        setPointDeg(pointDeg + Math.floor(360 / 6) * (6 - pointsDiff));
+      } else {
+        setCircleDeg(circleDeg + Math.floor(360 / 6) * (6 - pointsDiff));
+        setPointDeg(pointDeg - Math.floor(360 / 6) * (6 - pointsDiff));
+      }
+    }
+
     setCurrentPoint(point);
   };
 
   const onPrev = () => {
     if (currentPoint === 1) return;
+
     setCurrentPoint(currentPoint - 1);
     setCircleDeg(circleDeg - 60);
     setPointDeg(pointDeg + 60);
@@ -20,6 +41,7 @@ const App = () => {
 
   const onNext = () => {
     if (currentPoint === 6) return;
+
     setCurrentPoint(currentPoint + 1);
     setCircleDeg(circleDeg + 60);
     setPointDeg(pointDeg - 60);
@@ -29,7 +51,9 @@ const App = () => {
     <div className="container">
       <div className={styles.App}>
         <div className={styles.Content}>
-          <div></div>
+          <div className={styles.Header}>
+            <h1>Исторические даты</h1>
+          </div>
           <div className={styles.CircleControl}>
             <span>0{currentPoint}/06</span>
             <div className={styles.CirlceArrows}>
@@ -73,7 +97,7 @@ const App = () => {
           </div>
           <div className={styles.Carusel}></div>
         </div>
-        <CentetCircle
+        <CenterCircle
           currentPoint={currentPoint}
           circleDeg={circleDeg}
           pointDeg={pointDeg}

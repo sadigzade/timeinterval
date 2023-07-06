@@ -32,15 +32,39 @@
 .Content {
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
   height: 100%;
-  margin-left: 80px;
+  padding-top: 170px;
+}
+
+.Header {
+  position: relative;
+  padding-left: 5.55555vw;
+  max-width: 24.5139vw;
+}
+.Header::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 5px;
+  height: 8.33333vw;
+  transform: translateY(-50%);
+  background: linear-gradient(#3877ee, #ef5da8);
+}
+.Header h1 {
+  font-size: 3.9vw;
+  font-weight: 700;
+  line-height: 120%;
 }
 
 .CircleControl {
   display: flex;
   flex-direction: column;
   row-gap: 20px;
+  flex-grow: 1;
+  justify-content: flex-end;
+  height: 100%;
+  margin-left: 5.55555vw;
 }
 
 .CircleControl span {

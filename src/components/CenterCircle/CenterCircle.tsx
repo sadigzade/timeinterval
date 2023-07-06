@@ -1,16 +1,16 @@
-import { FC, useState } from "react";
-import styles from "./CentetCircle.module.css";
+import { FC } from "react";
+import styles from "./CenterCircle.module.css";
 
 const D = 530;
 
-type CentetCircleProps = {
+type CenterCircleProps = {
   currentPoint: number;
   circleDeg: number;
   pointDeg: number;
   onPointClick: (point: number) => void;
 };
 
-const CentetCircle: FC<CentetCircleProps> = ({
+const CenterCircle: FC<CenterCircleProps> = ({
   currentPoint,
   circleDeg,
   pointDeg,
@@ -48,4 +48,4 @@ const CentetCircle: FC<CentetCircleProps> = ({
   );
 };
 
-export default CentetCircle;
+export default CenterCircle;
