@@ -1,0 +1,86 @@
+.App {
+  height: 100vh;
+  border-left: 1px solid #e1e5ec;
+  border-right: 1px solid #e1e5ec;
+  position: relative;
+}
+
+.App::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  background-color: #e1e5ec;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  z-index: -1;
+}
+
+.App::before {
+  content: "";
+  position: absolute;
+  width: 1px;
+  height: 100%;
+  background-color: #e1e5ec;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: -1;
+}
+
+.Content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 100%;
+  margin-left: 80px;
+}
+
+.CircleControl {
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+}
+
+.CircleControl span {
+  font-size: 14px;
+}
+
+.CirlceArrows {
+  display: flex;
+  align-items: center;
+  column-gap: 20px;
+}
+
+.CircleArrowPrev,
+.CircleArrowNext {
+  width: 50px;
+  height: 50px;
+  border: 1px solid #9ba4ba;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all ease 300ms;
+}
+
+.CircleArrowPrev.disabled,
+.CircleArrowNext.disabled {
+  border: 1px solid #c7ccd9;
+  cursor: auto;
+}
+.CircleArrowPrev.disabled svg path,
+.CircleArrowNext.disabled svg path {
+  transition: all ease 300ms;
+  stroke: #9ba4b9;
+}
+
+.CircleArrowNext {
+  transform: rotate(180deg);
+}
+
+.Carusel {
+  height: 135px;
+}
