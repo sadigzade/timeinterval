@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=PT+Sans:wght@400;700&display=swap");
 
 *,
 *::after,
@@ -16,14 +16,14 @@ body {
   line-height: 30px;
   background-color: #f4f5f9;
   color: #42567a;
-  overflow: hidden;
 }
 
 h1,
 h2,
 h3,
 h4,
-h5 {
+h5,
+p {
   margin: 0;
   padding: 0;
   font-size: 20px;
@@ -46,4 +46,18 @@ button {
   max-width: 1480px;
   padding: 0 20px;
   margin: 0 auto;
+}
+
+.truncate-text {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  word-break: break-word;
+}
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  display: none;
 }
