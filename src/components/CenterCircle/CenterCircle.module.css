@@ -17,6 +17,29 @@
   z-index: -1;
 }
 
+.Dates {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 140px;
+  top: 50%;
+  left: 50%;
+  z-index: 20;
+  transform: translate(-50%, -50%);
+}
+.Dates span {
+  font-size: 200px;
+  font-weight: 700;
+  line-height: 160px;
+  letter-spacing: -4px;
+}
+.DateBlue {
+  color: #5d5fef;
+}
+.DatePink {
+  color: #ef5da8;
+}
+
 .CirclePoints {
   width: 530px;
   height: 530px;
@@ -32,14 +55,23 @@
   justify-content: center;
   width: 6px;
   height: 6px;
-  z-index: 10;
   border-radius: 50%;
   background-color: #42567a;
   cursor: pointer;
-  overflow: hidden;
+  font-size: 0;
+  /* overflow: hidden; */
   transition: all ease 300ms;
   color: #42567a;
   border: 1px solid transparent;
+}
+
+.PointName {
+  position: absolute;
+  top: 50%;
+  right: calc(-100% - 20px);
+  transform: translateY(-50%);
+  font-weight: 700;
+  line-height: 30px;
 }
 
 .Point.active,
@@ -48,6 +80,11 @@
   height: 56px;
   border: 1px solid #9399a7;
   background-color: #f4f5f9;
+}
+.Point.active .PointValue,
+.Point.active .PointName,
+.Point:hover .PointValue {
+  font-size: 20px;
 }
 
 .CircleControl {

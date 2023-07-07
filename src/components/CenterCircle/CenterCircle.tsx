@@ -1,10 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./CenterCircle.module.css";
-import { useWindowSize } from "../../hoooks/useWindowSize";
 import "swiper/css/navigation";
+import { gsap } from "gsap";
 
 const CenterCircle = () => {
-  // const [width] = useWindowSize();
   const [currentPoint, setCurrentPoint] = useState(1);
   const [circleDeg, setCircleDeg] = useState(-60);
   const [pointDeg, setPointDeg] = useState(60);
@@ -49,8 +48,16 @@ const CenterCircle = () => {
     setPointDeg(pointDeg - 60);
   };
 
+  useEffect(() => {
+    gsap.timeline().from(`#point-name-${currentPoint}`, { duration: 1.5, opacity: 0, delay: 0.5 });
+  }, [currentPoint]);
+
   return (
     <div className={styles.CenterCircle}>
+      <div className={styles.Dates}>
+        <span className={styles.DateBlue}>2015</span>
+        <span className={styles.DatePink}>2022</span>
+      </div>
       <ul
         className={styles.CirclePoints}
         style={{
@@ -72,7 +79,10 @@ const CenterCircle = () => {
               }}
               onClick={() => onPointClick(index + 1)}
             >
-              {index + 1}
+              <span className={styles.PointValue}>{index + 1}</span>
+              <span id={`point-name-${index + 1}`} className={styles.PointName}>
+                Наука
+              </span>
             </li>
           );
         })}
