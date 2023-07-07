@@ -1,10 +1,18 @@
 import { useEffect, useState } from "react";
+import { gsap } from "gsap";
+import { useAppDispatch, useAppSelector } from "../../hoooks/useHooks";
+import { setCurrentPoint } from "../../services/slices/dates/datesSlice";
+import CircleControl from "./CircleControl/CircleControl";
 import styles from "./CenterCircle.module.css";
 import "swiper/css/navigation";
-import { gsap } from "gsap";
 
 const CenterCircle = () => {
-  const [currentPoint, setCurrentPoint] = useState(1);
+  const dispatch = useAppDispatch();
+  const dates = useAppSelector((state) => state.dates.dates);
+  const currentPoint = useAppSelector((state) => state.dates.currentPoint);
+  const startInterval = dates[currentPoint - 1] && dates[currentPoint - 1].startInterval;
+  const endInterval = dates[currentPoint - 1] && dates[currentPoint - 1].endInterval;
+
   const [circleDeg, setCircleDeg] = useState(-60);
   const [pointDeg, setPointDeg] = useState(60);
 
@@ -29,23 +37,7 @@ const CenterCircle = () => {
       }
     }
 
-    setCurrentPoint(point);
-  };
-
-  const onPrev = () => {
-    if (currentPoint === 1) return;
-
-    setCurrentPoint(currentPoint - 1);
-    setCircleDeg(circleDeg - 60);
-    setPointDeg(pointDeg + 60);
-  };
-
-  const onNext = () => {
-    if (currentPoint === 6) return;
-
-    setCurrentPoint(currentPoint + 1);
-    setCircleDeg(circleDeg + 60);
-    setPointDeg(pointDeg - 60);
+    dispatch(setCurrentPoint(point));
   };
 
   useEffect(() => {
@@ -55,8 +47,8 @@ const CenterCircle = () => {
   return (
     <div className={styles.CenterCircle}>
       <div className={styles.Dates}>
-        <span className={styles.DateBlue}>2015</span>
-        <span className={styles.DatePink}>2022</span>
+        <span className={styles.DateBlue}>{startInterval}</span>
+        <span className={styles.DatePink}>{endInterval}</span>
       </div>
       <ul
         className={styles.CirclePoints}
@@ -64,7 +56,7 @@ const CenterCircle = () => {
           transform: `rotate(${circleDeg}deg)`,
         }}
       >
-        {new Array(6).fill(0).map((_, index) => {
+        {dates.map((date, index) => {
           const X = (530 / 2) * (1 + Math.cos((index * (2 * Math.PI)) / 6));
           const Y = (530 / 2) * (1 - Math.sin((index * (2 * Math.PI)) / 6));
 
@@ -79,55 +71,24 @@ const CenterCircle = () => {
               }}
               onClick={() => onPointClick(index + 1)}
             >
-              <span className={styles.PointValue}>{index + 1}</span>
-              <span id={`point-name-${index + 1}`} className={styles.PointName}>
-                Наука
-              </span>
+              <div className={styles.PointWrapper}>
+                <span className={styles.PointValue}>{index + 1}</span>
+                {date.name && (
+                  <span id={`point-name-${index + 1}`} className={styles.PointName}>
+                    {date.name}
+                  </span>
+                )}
+              </div>
             </li>
           );
         })}
       </ul>
-      <div className={styles.CircleControl}>
-        <span>0{currentPoint}/06</span>
-        <div className={styles.CirlceArrows}>
-          <button
-            className={`${styles.CircleArrowPrev} ${currentPoint === 1 ? styles.disabled : ""}`}
-            onClick={onPrev}
-          >
-            <svg
-              width="10"
-              height="14"
-              viewBox="0 0 10 14"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M8.49988 0.750001L2.24988 7L8.49988 13.25"
-                stroke="#42567A"
-                strokeWidth="2"
-              />
-            </svg>
-          </button>
-          <button
-            className={`${styles.CircleArrowNext} ${currentPoint === 6 ? styles.disabled : ""}`}
-            onClick={onNext}
-          >
-            <svg
-              width="10"
-              height="14"
-              viewBox="0 0 10 14"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M8.49988 0.750001L2.24988 7L8.49988 13.25"
-                stroke="#42567A"
-                strokeWidth="2"
-              />
-            </svg>
-          </button>
-        </div>
-      </div>
+      <CircleControl
+        circleDeg={circleDeg}
+        pointDeg={pointDeg}
+        setCircleDeg={setCircleDeg}
+        setPointDeg={setPointDeg}
+      />
     </div>
   );
 };

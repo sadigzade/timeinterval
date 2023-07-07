@@ -1,9 +1,14 @@
 import { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { useAppSelector } from "../../hoooks/useHooks";
 import styles from "./SwiperBlock.module.css";
 import "swiper/css";
 
 const SwiperBlock = () => {
+  const currentPoint = useAppSelector((state) => state.dates.currentPoint);
+  const dates = useAppSelector((state) => state.dates.dates);
+  const events = dates[currentPoint - 1] ? dates[currentPoint - 1].events : [];
+
   return (
     <div className={styles.Carusel}>
       <div className={styles.Controller}>
@@ -29,42 +34,12 @@ const SwiperBlock = () => {
         modules={[Navigation]}
         className="swiper_container"
       >
-        <SwiperSlide className={styles.SwiperSlide}>
-          <h3 className={styles.SlideYear}>2015</h3>
-          <p className="truncate-text">
-            13 сентября — частное солнечное затмение, видимое в Южной Африке и части Антарктиды
-          </p>
-        </SwiperSlide>
-        <SwiperSlide className={styles.SwiperSlide}>
-          <h3 className={styles.SlideYear}>2015</h3>
-          <p className="truncate-text">
-            13 сентября — частное солнечное затмение, видимое в Южной Африке и части Антарктиды
-          </p>
-        </SwiperSlide>
-        <SwiperSlide className={styles.SwiperSlide}>
-          <h3 className={styles.SlideYear}>2015</h3>
-          <p className="truncate-text">
-            13 сентября — частное солнечное затмение, видимое в Южной Африке и части Антарктиды
-          </p>
-        </SwiperSlide>
-        <SwiperSlide className={styles.SwiperSlide}>
-          <h3 className={styles.SlideYear}>2015</h3>
-          <p className="truncate-text">
-            13 сентября — частное солнечное затмение, видимое в Южной Африке и части Антарктиды
-          </p>
-        </SwiperSlide>
-        <SwiperSlide className={styles.SwiperSlide}>
-          <h3 className={styles.SlideYear}>2015</h3>
-          <p className="truncate-text">
-            13 сентября — частное солнечное затмение, видимое в Южной Африке и части Антарктиды
-          </p>
-        </SwiperSlide>
-        <SwiperSlide className={styles.SwiperSlide}>
-          <h3 className={styles.SlideYear}>2015</h3>
-          <p className="truncate-text">
-            13 сентября — частное солнечное затмение, видимое в Южной Африке и части Антарктиды
-          </p>
-        </SwiperSlide>
+        {events.map((event) => (
+          <SwiperSlide key={event.id} className={styles.SwiperSlide}>
+            <h3 className={styles.SlideYear}>{event.year}</h3>
+            <p className="truncate-text">{event.text}</p>
+          </SwiperSlide>
+        ))}
       </Swiper>
       <div className={styles.Controller}>
         <div className={`swiper-button-next ${styles.ArrowNext} ${styles.Arrow}`}>

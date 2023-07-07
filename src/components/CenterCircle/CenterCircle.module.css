@@ -59,19 +59,29 @@
   background-color: #42567a;
   cursor: pointer;
   font-size: 0;
-  /* overflow: hidden; */
   transition: all ease 300ms;
   color: #42567a;
   border: 1px solid transparent;
 }
 
+.PointWrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.PointValue {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .PointName {
   position: absolute;
   top: 50%;
-  right: calc(-100% - 20px);
+  left: calc(100% + 20px);
   transform: translateY(-50%);
-  font-weight: 700;
-  line-height: 30px;
 }
 
 .Point.active,
@@ -85,67 +95,4 @@
 .Point.active .PointName,
 .Point:hover .PointValue {
   font-size: 20px;
-}
-
-.CircleControl {
-  position: absolute;
-  bottom: 0;
-  left: 80px;
-  transform: translateY(50%);
-  display: flex;
-  flex-direction: column;
-  row-gap: 20px;
-  /* position: absolute;
-  bottom: 0;
-  transform: translateY(50%);
-  display: flex;
-  flex-direction: column;
-  row-gap: 20px;
-  flex-grow: 1;
-  justify-content: flex-end;
-  height: 100%;
-  margin-left: 80px; */
-}
-
-.CircleControl span {
-  font-size: 14px;
-}
-
-.CirlceArrows {
-  display: flex;
-  align-items: center;
-  column-gap: 20px;
-}
-
-.CircleArrowPrev,
-.CircleArrowNext {
-  width: 50px;
-  height: 50px;
-  border: 1px solid #9ba4ba;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all ease 300ms;
-}
-
-.CircleArrowPrev:hover,
-.CircleArrowNext:hover {
-  background-color: #fff;
-}
-
-.CircleArrowPrev.disabled,
-.CircleArrowNext.disabled {
-  border: 1px solid #c7ccd9;
-  cursor: auto;
-}
-.CircleArrowPrev.disabled svg path,
-.CircleArrowNext.disabled svg path {
-  transition: all ease 300ms;
-  stroke: #9ba4b9;
-}
-
-.CircleArrowNext {
-  transform: rotate(180deg);
 }

@@ -1,0 +1,52 @@
+.CircleControl {
+  position: absolute;
+  bottom: 0;
+  left: 80px;
+  transform: translateY(50%);
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+}
+
+.CircleControl span {
+  font-size: 14px;
+}
+
+.CirlceArrows {
+  display: flex;
+  align-items: center;
+  column-gap: 20px;
+}
+
+.CircleArrowPrev,
+.CircleArrowNext {
+  width: 50px;
+  height: 50px;
+  border: 1px solid #9ba4ba;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all ease 300ms;
+}
+
+.CircleArrowPrev:hover,
+.CircleArrowNext:hover {
+  background-color: #fff;
+}
+
+.CircleArrowPrev.disabled,
+.CircleArrowNext.disabled {
+  border: 1px solid #c7ccd9;
+  cursor: auto;
+}
+.CircleArrowPrev.disabled svg path,
+.CircleArrowNext.disabled svg path {
+  transition: all ease 300ms;
+  stroke: #9ba4b9;
+}
+
+.CircleArrowNext {
+  transform: rotate(180deg);
+}
