@@ -4,6 +4,7 @@ import SwiperBlock from "../SwiperBlock/SwiperBlock";
 import styles from "./App.module.css";
 import { useAppDispatch } from "../../hoooks/useHooks";
 import { getDates } from "../../services/slices/dates/datesSlice";
+import ControllerMobile from "../ControllerMobile/ControllerMobile";
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -21,6 +22,7 @@ const App = () => {
           </div>
           <CenterCircle />
           <SwiperBlock />
+          <ControllerMobile />
         </div>
       </div>
     </div>

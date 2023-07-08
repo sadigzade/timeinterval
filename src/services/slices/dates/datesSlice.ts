@@ -7,6 +7,8 @@ type DatesState = {
   error: string | null;
   dates: Date[];
   currentPoint: number;
+  circleDeg: number;
+  pointDeg: number;
   prevInterval: PrevInterval;
 };
 
@@ -15,6 +17,8 @@ const initialState: DatesState = {
   error: null,
   dates: [],
   currentPoint: 1,
+  circleDeg: -60,
+  pointDeg: 60,
   prevInterval: {
     startInterval: 1950,
     endInterval: 1950,
@@ -57,6 +61,12 @@ export const DatesSlice = createSlice({
       };
       state.currentPoint = state.currentPoint + 1;
     },
+    setCircleDeg: (state, action: PayloadAction<number>) => {
+      state.circleDeg = action.payload;
+    },
+    setPointDeg: (state, action: PayloadAction<number>) => {
+      state.pointDeg = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -78,6 +88,7 @@ export const DatesSlice = createSlice({
   },
 });
 
-export const { setCurrentPoint, prevPoint, nextPoint } = DatesSlice.actions;
+export const { setCurrentPoint, prevPoint, nextPoint, setCircleDeg, setPointDeg } =
+  DatesSlice.actions;
 
 export default DatesSlice.reducer;

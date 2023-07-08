@@ -17,6 +17,12 @@
   z-index: -1;
 }
 
+@media screen and (max-width: 768px) {
+  .CenterCircle::after {
+    display: none;
+  }
+}
+
 .Dates {
   position: absolute;
   display: flex;
@@ -27,15 +33,35 @@
   z-index: 20;
   transform: translate(-50%, -50%);
 }
+
+@media screen and (max-width: 768px) {
+  .Dates {
+    position: static;
+    transform: translate(0, 0);
+    justify-content: space-between;
+    gap: 0;
+    width: 100%;
+  }
+}
+
 .Dates span {
   font-size: 13.9vw;
   font-weight: 700;
   line-height: 160px;
   letter-spacing: -4px;
 }
+
+@media screen and (max-width: 768px) {
+  .Dates span {
+    font-size: 14.3vw;
+    letter-spacing: -1.12px;
+  }
+}
+
 .DateBlue {
   color: #5d5fef;
 }
+
 .DatePink {
   color: #ef5da8;
 }
@@ -46,6 +72,12 @@
   border-radius: 50%;
   border: 1px solid #d0d5e0;
   transition: all ease 300ms;
+}
+
+@media screen and (max-width: 768px) {
+  .CirclePoints {
+    display: none;
+  }
 }
 
 .Point {

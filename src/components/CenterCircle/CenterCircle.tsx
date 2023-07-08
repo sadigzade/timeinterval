@@ -1,8 +1,7 @@
-import { useState } from "react";
 import CountUp from "react-countup";
 import { gsap } from "gsap";
 import { useAppDispatch, useAppSelector } from "../../hoooks/useHooks";
-import { setCurrentPoint } from "../../services/slices/dates/datesSlice";
+import { setCircleDeg, setCurrentPoint, setPointDeg } from "../../services/slices/dates/datesSlice";
 import CircleControl from "./CircleControl/CircleControl";
 import styles from "./CenterCircle.module.css";
 import "swiper/css/navigation";
@@ -12,10 +11,10 @@ const CenterCircle = () => {
   const dates = useAppSelector((state) => state.dates.dates);
   const currentPoint = useAppSelector((state) => state.dates.currentPoint);
   const prevInterval = useAppSelector((state) => state.dates.prevInterval);
+  const circleDeg = useAppSelector((state) => state.dates.circleDeg);
+  const pointDeg = useAppSelector((state) => state.dates.pointDeg);
   const startInterval = dates[currentPoint - 1] && dates[currentPoint - 1].startInterval;
   const endInterval = dates[currentPoint - 1] && dates[currentPoint - 1].endInterval;
-  const [circleDeg, setCircleDeg] = useState(-60);
-  const [pointDeg, setPointDeg] = useState(60);
   const timeline = gsap.timeline();
   timeline.from(`#point-name-${currentPoint}`, { duration: 1.5, opacity: 0, delay: 0.5 });
 
@@ -24,26 +23,24 @@ const CenterCircle = () => {
 
     if (pointsDiff <= Math.floor(6 / 2)) {
       if (point > currentPoint) {
-        setCircleDeg(circleDeg + Math.floor(360 / 6) * pointsDiff);
-        setPointDeg(pointDeg - Math.floor(360 / 6) * pointsDiff);
+        dispatch(setCircleDeg(circleDeg + Math.floor(360 / 6) * pointsDiff));
+        dispatch(setPointDeg(pointDeg - Math.floor(360 / 6) * pointsDiff));
       } else {
-        setCircleDeg(circleDeg - Math.floor(360 / 6) * pointsDiff);
-        setPointDeg(pointDeg + Math.floor(360 / 6) * pointsDiff);
+        dispatch(setCircleDeg(circleDeg - Math.floor(360 / 6) * pointsDiff));
+        dispatch(setPointDeg(pointDeg + Math.floor(360 / 6) * pointsDiff));
       }
     } else {
       if (point > currentPoint) {
-        setCircleDeg(circleDeg - Math.floor(360 / 6) * (6 - pointsDiff));
-        setPointDeg(pointDeg + Math.floor(360 / 6) * (6 - pointsDiff));
+        dispatch(setCircleDeg(circleDeg - Math.floor(360 / 6) * (6 - pointsDiff)));
+        dispatch(setPointDeg(pointDeg + Math.floor(360 / 6) * (6 - pointsDiff)));
       } else {
-        setCircleDeg(circleDeg + Math.floor(360 / 6) * (6 - pointsDiff));
-        setPointDeg(pointDeg - Math.floor(360 / 6) * (6 - pointsDiff));
+        dispatch(setCircleDeg(circleDeg + Math.floor(360 / 6) * (6 - pointsDiff)));
+        dispatch(setPointDeg(pointDeg - Math.floor(360 / 6) * (6 - pointsDiff)));
       }
     }
 
     dispatch(setCurrentPoint(point));
   };
-
-  console.log(prevInterval);
 
   return (
     <div className={styles.CenterCircle}>
@@ -94,12 +91,9 @@ const CenterCircle = () => {
           );
         })}
       </ul>
-      <CircleControl
-        circleDeg={circleDeg}
-        pointDeg={pointDeg}
-        setCircleDeg={setCircleDeg}
-        setPointDeg={setPointDeg}
-      />
+      <div className="d-none">
+        <CircleControl />
+      </div>
     </div>
   );
 };

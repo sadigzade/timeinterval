@@ -57,7 +57,19 @@ button {
   word-break: break-word;
 }
 
+@media screen and (max-width: 768px) {
+  .truncate-text {
+    -webkit-line-clamp: 4;
+  }
+}
+
 .swiper-button-prev::after,
 .swiper-button-next::after {
   display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .d-none {
+    display: none;
+  }
 }

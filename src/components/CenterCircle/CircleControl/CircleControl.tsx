@@ -1,39 +1,33 @@
-import { FC } from "react";
 import styles from "./CircleControl.module.css";
 import { useAppDispatch, useAppSelector } from "../../../hoooks/useHooks";
-import { nextPoint, prevPoint } from "../../../services/slices/dates/datesSlice";
-
-type CircleControlProps = {
-  circleDeg: number;
-  pointDeg: number;
-  setCircleDeg: (deg: number) => void;
-  setPointDeg: (deg: number) => void;
-};
-
-const CircleControl: FC<CircleControlProps> = ({
-  circleDeg,
-  pointDeg,
+import {
+  nextPoint,
+  prevPoint,
   setCircleDeg,
   setPointDeg,
-}) => {
+} from "../../../services/slices/dates/datesSlice";
+
+const CircleControl = () => {
   const dispatch = useAppDispatch();
   const currentPoint = useAppSelector((state) => state.dates.currentPoint);
   const countDates = useAppSelector((state) => state.dates.dates).length;
+  const circleDeg = useAppSelector((state) => state.dates.circleDeg);
+  const pointDeg = useAppSelector((state) => state.dates.pointDeg);
 
   const onPrev = () => {
     if (currentPoint === 1) return;
 
     dispatch(prevPoint());
-    setCircleDeg(circleDeg - 360 / countDates);
-    setPointDeg(pointDeg + 360 / countDates);
+    dispatch(setCircleDeg(circleDeg - 360 / countDates));
+    dispatch(setPointDeg(pointDeg + 360 / countDates));
   };
 
   const onNext = () => {
     if (currentPoint === 6) return;
 
     dispatch(nextPoint());
-    setCircleDeg(circleDeg + 360 / countDates);
-    setPointDeg(pointDeg - 360 / countDates);
+    dispatch(setCircleDeg(circleDeg + 360 / countDates));
+    dispatch(setPointDeg(pointDeg - 360 / countDates));
   };
 
   return (

@@ -1,0 +1,32 @@
+.CircleControl {
+  display: none;
+}
+
+.PointList {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+}
+
+.PointItem {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #acb5c5;
+  cursor: pointer;
+}
+
+.PointItem.Active {
+  background-color: #42567a;
+}
+
+@media screen and (max-width: 768px) {
+  .CircleControl {
+    display: block;
+    position: relative;
+  }
+}

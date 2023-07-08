@@ -32,6 +32,7 @@
   top: 30px;
   z-index: 10;
 }
+
 .Header::before {
   content: "";
   position: absolute;
@@ -42,8 +43,37 @@
   transform: translateY(-50%);
   background: linear-gradient(#3877ee, #ef5da8);
 }
+
 .Header h1 {
   font-size: 3.9vw;
   font-weight: 700;
   line-height: 120%;
+}
+
+@media screen and (max-width: 768px) {
+  .App {
+    border: none;
+  }
+
+  .App::before {
+    display: none;
+  }
+
+  .Header {
+    padding-left: 0;
+    max-width: 38.4375vw;
+    top: 59px;
+  }
+
+  .Header::before {
+    display: none;
+  }
+
+  .Header h1 {
+    font-size: 6.25vw;
+  }
+
+  .Content {
+    justify-content: flex-end;
+  }
 }
