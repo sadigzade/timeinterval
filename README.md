@@ -6,6 +6,7 @@
 + Redux
 + GreenSock
 + Swiperjs
++ Database - mockapi
 
 ## How to run the application?
 Clone the project locally on your computer: 
