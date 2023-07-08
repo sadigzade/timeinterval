@@ -17,3 +17,8 @@ export type Event = {
   year: number;
   text: string;
 };
+
+export type PrevInterval = {
+  startInterval: number;
+  endInterval: number;
+};

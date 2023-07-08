@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import CountUp from "react-countup";
 import { gsap } from "gsap";
 import { useAppDispatch, useAppSelector } from "../../hoooks/useHooks";
 import { setCurrentPoint } from "../../services/slices/dates/datesSlice";
@@ -10,11 +11,13 @@ const CenterCircle = () => {
   const dispatch = useAppDispatch();
   const dates = useAppSelector((state) => state.dates.dates);
   const currentPoint = useAppSelector((state) => state.dates.currentPoint);
+  const prevInterval = useAppSelector((state) => state.dates.prevInterval);
   const startInterval = dates[currentPoint - 1] && dates[currentPoint - 1].startInterval;
   const endInterval = dates[currentPoint - 1] && dates[currentPoint - 1].endInterval;
-
   const [circleDeg, setCircleDeg] = useState(-60);
   const [pointDeg, setPointDeg] = useState(60);
+  const timeline = gsap.timeline();
+  timeline.from(`#point-name-${currentPoint}`, { duration: 1.5, opacity: 0, delay: 0.5 });
 
   const onPointClick = (point: number) => {
     const pointsDiff = Math.abs(currentPoint - point);
@@ -40,15 +43,23 @@ const CenterCircle = () => {
     dispatch(setCurrentPoint(point));
   };
 
-  useEffect(() => {
-    gsap.timeline().from(`#point-name-${currentPoint}`, { duration: 1.5, opacity: 0, delay: 0.5 });
-  }, [currentPoint]);
+  console.log(prevInterval);
 
   return (
     <div className={styles.CenterCircle}>
       <div className={styles.Dates}>
-        <span className={styles.DateBlue}>{startInterval}</span>
-        <span className={styles.DatePink}>{endInterval}</span>
+        <CountUp
+          start={prevInterval.startInterval}
+          end={startInterval}
+          separator={""}
+          className={styles.DateBlue}
+        />
+        <CountUp
+          start={prevInterval.endInterval}
+          end={endInterval}
+          separator={""}
+          className={styles.DatePink}
+        />
       </div>
       <ul
         className={styles.CirclePoints}

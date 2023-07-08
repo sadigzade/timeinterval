@@ -1,5 +1,6 @@
 import { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { gsap } from "gsap";
 import { useAppSelector } from "../../hoooks/useHooks";
 import styles from "./SwiperBlock.module.css";
 import "swiper/css";
@@ -8,9 +9,15 @@ const SwiperBlock = () => {
   const currentPoint = useAppSelector((state) => state.dates.currentPoint);
   const dates = useAppSelector((state) => state.dates.dates);
   const events = dates[currentPoint - 1] ? dates[currentPoint - 1].events : [];
+  const t1 = gsap.timeline();
+  t1.to("#carusel", { duration: 0.3, opacity: 0 }).to("#carusel", {
+    duration: 1.5,
+    opacity: 1,
+    delay: 0.2,
+  });
 
   return (
-    <div className={styles.Carusel}>
+    <div id={"carusel"} className={styles.Carusel}>
       <div className={styles.Controller}>
         <div className={`swiper-button-prev ${styles.ArrowPrev} ${styles.Arrow}`}>
           <svg
@@ -25,11 +32,17 @@ const SwiperBlock = () => {
         </div>
       </div>
       <Swiper
-        spaceBetween={80}
-        slidesPerView={3}
+        spaceBetween={40}
+        slidesPerView={2}
         navigation={{
           nextEl: ".swiper-button-next",
           prevEl: ".swiper-button-prev",
+        }}
+        breakpoints={{
+          992: {
+            slidesPerView: 3,
+            spaceBetween: 80,
+          },
         }}
         modules={[Navigation]}
         className="swiper_container"

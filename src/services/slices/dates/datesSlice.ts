@@ -1,5 +1,5 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { Date, Status } from "../../types/data";
+import { Date, PrevInterval, Status } from "../../types/data";
 import { request } from "../../../utils/request";
 
 type DatesState = {
@@ -7,6 +7,7 @@ type DatesState = {
   error: string | null;
   dates: Date[];
   currentPoint: number;
+  prevInterval: PrevInterval;
 };
 
 const initialState: DatesState = {
@@ -14,6 +15,10 @@ const initialState: DatesState = {
   error: null,
   dates: [],
   currentPoint: 1,
+  prevInterval: {
+    startInterval: 1950,
+    endInterval: 1950,
+  },
 };
 
 export const getDates = createAsyncThunk<Date[], undefined, { rejectValue: string }>(
@@ -32,12 +37,24 @@ export const DatesSlice = createSlice({
   initialState,
   reducers: {
     setCurrentPoint: (state, action: PayloadAction<number>) => {
+      state.prevInterval = {
+        startInterval: state.dates[state.currentPoint - 1].startInterval,
+        endInterval: state.dates[state.currentPoint - 1].endInterval,
+      };
       state.currentPoint = action.payload;
     },
     prevPoint: (state) => {
+      state.prevInterval = {
+        startInterval: state.dates[state.currentPoint - 1].startInterval,
+        endInterval: state.dates[state.currentPoint - 1].endInterval,
+      };
       state.currentPoint = state.currentPoint - 1;
     },
     nextPoint: (state) => {
+      state.prevInterval = {
+        startInterval: state.dates[state.currentPoint - 1].startInterval,
+        endInterval: state.dates[state.currentPoint - 1].endInterval,
+      };
       state.currentPoint = state.currentPoint + 1;
     },
   },

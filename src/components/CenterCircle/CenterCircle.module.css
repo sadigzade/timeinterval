@@ -28,7 +28,7 @@
   transform: translate(-50%, -50%);
 }
 .Dates span {
-  font-size: 200px;
+  font-size: 13.9vw;
   font-weight: 700;
   line-height: 160px;
   letter-spacing: -4px;
@@ -82,6 +82,7 @@
   top: 50%;
   left: calc(100% + 20px);
   transform: translateY(-50%);
+  font-weight: 700;
 }
 
 .Point.active,
