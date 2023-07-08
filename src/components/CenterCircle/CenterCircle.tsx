@@ -21,6 +21,7 @@ const CenterCircle = () => {
 
   return (
     <div className={styles.CenterCircle}>
+      <div className={styles.CicleLine} />
       <div className={styles.Dates}>
         <CountUp
           start={prevInterval.startInterval}

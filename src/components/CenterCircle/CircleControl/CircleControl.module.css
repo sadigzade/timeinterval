@@ -31,25 +31,6 @@
   transition: all ease 300ms;
 }
 
-@media screen and (max-width: 768px) {
-  .CircleControl {
-    position: static;
-    transform: translateY(0);
-    row-gap: 10px;
-    padding-bottom: 13px;
-  }
-
-  .CirlceArrows {
-    column-gap: 8px;
-  }
-
-  .CircleArrowPrev,
-  .CircleArrowNext {
-    width: 25px;
-    height: 25px;
-  }
-}
-
 .CircleArrowPrev:hover,
 .CircleArrowNext:hover {
   background-color: #fff;
@@ -70,8 +51,21 @@
   transform: rotate(180deg);
 }
 
-/* @media screen and (max-width: 768px) {
+@media screen and (max-width: 768px) {
   .CircleControl {
-    display: none;
+    position: static;
+    transform: translateY(0);
+    row-gap: 10px;
+    padding-bottom: 13px;
   }
-} */
+
+  .CirlceArrows {
+    column-gap: 8px;
+  }
+
+  .CircleArrowPrev,
+  .CircleArrowNext {
+    width: 25px;
+    height: 25px;
+  }
+}
