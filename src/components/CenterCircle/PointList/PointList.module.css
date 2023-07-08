@@ -1,0 +1,13 @@
+.CirclePoints {
+  width: 530px;
+  height: 530px;
+  border-radius: 50%;
+  border: 1px solid #d0d5e0;
+  transition: all ease 300ms;
+}
+
+@media screen and (max-width: 768px) {
+  .CirclePoints {
+    display: none;
+  }
+}
